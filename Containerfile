@@ -33,11 +33,12 @@ ARG SOURCE_IMAGE="fedora-coreos"
 # - stable-zfs
 # - stable-nvidia-zfs
 # - (and the above with testing rather than stable)
-ARG SOURCE_SUFFIX="stable-nvidia"
+#ARG SOURCE_SUFFIX="stable-nvidia"
+ARG SOURCE_SUFFIX=""
 
 ## SOURCE_TAG arg must be a version built for the specific image: eg, 39, 40, gts, latest
-ARG SOURCE_TAG="latest"
-
+#ARG SOURCE_TAG="latest"
+ARG SOURCE_TAG="stable-nvidia"
 
 ### 2. SOURCE IMAGE
 ## this is a standard Containerfile FROM using the build ARGs above to select the right upstream image
