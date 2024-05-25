@@ -24,7 +24,7 @@ RELEASE="$(rpm -E %fedora)"
 #systemctl set-default graphical.target
 
 ### Disable SystemD targets/services
-systemctl disable --now --no-warn sshd.service
+systemctl disable sshd.service
 
 ### Remove unnecessary packages from core OS (mostly for running as or managing containers)
 REMOVE_PACKAGES=""
