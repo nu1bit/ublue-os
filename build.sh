@@ -23,11 +23,8 @@ RELEASE="$(rpm -E %fedora)"
 #systemctl enable tlp
 #systemctl set-default graphical.target
 
-### Disable unnecessary SystemD targets/services
-systemctl disable afterburn-sshkeys.target
-systemctl disable console-login-helper-messages-gensnippet-os-release.service
-systemctl disable console-login-helper-messages-gensnippet-ssh-keys.service
-systemctl disable sshd.service
+### Disable SystemD targets/services
+systemctl disable --now --no-warn sshd.service
 
 ### Remove unnecessary packages from core OS (mostly for running as or managing containers)
 REMOVE_PACKAGES=""
@@ -40,14 +37,19 @@ cloud \
 console \
 google \
 intel \
+moby \
 nvidia-container \
 sssd \
 systemd-container \
 teamd \
 toolbox; do REMOVE_PACKAGES=$REMOVE_PACKAGES`rpm -qa --qf "%{NAME}\n" | grep -E '^'$pkgs | tr '\n' ' '`; done
 
+# sssd-client causes the build to fail, so removing it from list of packages to remove
+REMOVE_PACKAGES=$(echo "$REMOVE_PACKAGES" | sed -r 's/sssd-client //')
+
 rpm-ostree override remove $REMOVE_PACKAGES
 
+# Policy to allow upgrades when new builds are available
 cat << 'EOF' | tee /etc/containers/policy.json
 {
     "default": [{"type": "reject"}],
