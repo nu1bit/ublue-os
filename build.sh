@@ -44,7 +44,7 @@ nvidia-container \
 sssd \
 systemd-container \
 teamd \
-toolbox; do REMOVE_PACKAGES=$REMOVE_PACKAGES`rpm -qa | grep -E '^'$pkgs | tr '\n' ' '`; done
+toolbox; do REMOVE_PACKAGES=$REMOVE_PACKAGES`rpm -qa --qf "%{NAME}\n" | grep -E '^'$pkgs | tr '\n' ' '`; done
 
 rpm-ostree override remove $REMOVE_PACKAGES
 
