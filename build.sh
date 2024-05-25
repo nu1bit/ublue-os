@@ -22,3 +22,38 @@ RELEASE="$(rpm -E %fedora)"
 
 #systemctl enable tlp
 #systemctl set-default graphical.target
+
+### Disable unnecessary SystemD targets/services
+systemctl disable afterburn-sshkeys.target
+systemctl disable console-login-helper-messages-gensnippet-os-release.service
+systemctl disable console-login-helper-messages-gensnippet-ssh-keys.service
+systemctl disable sshd.service
+
+### Remove unnecessary packages from core OS (mostly for running as or managing containers)
+REMOVE_PACKAGES=""
+for pkgs in \
+NetworkManager-cloud \
+NetworkManager-team \
+afterburn \
+clevis \
+cloud \
+console \
+google \
+intel \
+nvidia-container \
+sssd \
+systemd-container \
+teamd \
+toolbox; do REMOVE_PACKAGES=$REMOVE_PACKAGES`rpm -qa | egrep '^'$pkgs | tr '\n' ' '`; done
+rpm-ostree override remove $REMOVE_PACKAGES
+
+cat << 'EOF' | tee /etc/containers/policy.json
+{
+    "default": [{"type": "reject"}],
+    "transports": {
+        "docker": {
+            "ghcr.io/nu1bit": [{"type": "insecureAcceptAnything"}]
+        }
+    }
+}
+EOF
