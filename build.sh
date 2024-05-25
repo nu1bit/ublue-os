@@ -24,14 +24,12 @@ RELEASE="$(rpm -E %fedora)"
 #systemctl set-default graphical.target
 
 ### Disable unnecessary SystemD targets/services
-echo '!! Disabling SystemD targets/services !!'
 systemctl disable afterburn-sshkeys.target
 systemctl disable console-login-helper-messages-gensnippet-os-release.service
 systemctl disable console-login-helper-messages-gensnippet-ssh-keys.service
 systemctl disable sshd.service
 
 ### Remove unnecessary packages from core OS (mostly for running as or managing containers)
-echo '!! Fetching packages to remove !!'
 REMOVE_PACKAGES=""
 for pkgs in \
 NetworkManager-cloud \
@@ -48,10 +46,8 @@ systemd-container \
 teamd \
 toolbox; do REMOVE_PACKAGES=$REMOVE_PACKAGES`rpm -qa | grep -E '^'$pkgs | tr '\n' ' '`; done
 
-echo '!! Removing packages !!'
 rpm-ostree override remove $REMOVE_PACKAGES
 
-echo '!! Configuring policy !!'
 cat << 'EOF' | tee /etc/containers/policy.json
 {
     "default": [{"type": "reject"}],
