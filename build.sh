@@ -23,6 +23,9 @@ RELEASE="$(rpm -E %fedora)"
 #systemctl enable tlp
 #systemctl set-default graphical.target
 
+### Update first so overriding packages doesn't fail
+rpm-ostree upgrade
+
 ### Disable unnecessary SystemD targets/services
 systemctl disable afterburn-sshkeys.target
 systemctl disable console-login-helper-messages-gensnippet-os-release.service
@@ -44,7 +47,7 @@ nvidia-container \
 sssd \
 systemd-container \
 teamd \
-toolbox; do REMOVE_PACKAGES=$REMOVE_PACKAGES`rpm -qa | egrep '^'$pkgs | tr '\n' ' '`; done
+toolbox; do REMOVE_PACKAGES=$REMOVE_PACKAGES`rpm -qa | grep -E '^'$pkgs | tr '\n' ' '`; done
 rpm-ostree override remove $REMOVE_PACKAGES
 
 cat << 'EOF' | tee /etc/containers/policy.json
