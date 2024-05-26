@@ -2,7 +2,6 @@
 > While these customisations are made for my use cases and hardware, you are free to either use it as is or to use it as a base for your own fork. You are at the whim of any changes I make, breaking or otherwise, which won't be communicated at all.
 
 # Getting Started
-
 Go to the [Universal Blue](https://github.com/ublue-os/image-template) repo and click on 'Use this template' to create your on copy (and also read the README).
 
 The main important files are:
@@ -25,3 +24,5 @@ The OCI image is based from `fedora-coreos:stable-nvidia` (currently version 40)
 - Install small number of KDE related apps (apps TBD)
 - *More to come*
 
+# How to Install
+The only method I have tested is documented [here](https://universal-blue.discourse.group/docs?topic=868#b-rebasing-guide-6). In a nutshell, you download any official Fedora Atomic desktop via ISO, install it like usual, then once logged into the OS, rebase the image.
