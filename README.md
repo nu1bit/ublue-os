@@ -6,16 +6,16 @@
 Go to the [Universal Blue](https://github.com/ublue-os/image-template) repo and click on 'Use this template' to create your on copy (and also read the README).
 
 The main important files are:
-- .github/workflows/build.yml (Instructions for GitHub Actions)
-- Containerfile (Docker/Podman container details)
-- build.sh (Script to customise the OS remove/add packages, alter config files, etc.)
-- cosign.pub (Public key for signing the container when it's pushed to GHCR)
+- `.github/workflows/build.yml` (Instructions for GitHub Actions)
+- `Containerfile` (Docker/Podman container details)
+- `build.sh` (Script to customise the OS remove/add packages, alter config files, etc.)
+- `cosign.pub` (Public key for signing the container when it's pushed to GHCR)
 
 The OCI image is based from `fedora-coreos:stable-nvidia` (currently version 40)
 
 ## List of Customisations
 ### Complete
-- :tumbleweed:
+- *Nothing yet*
 
 ### Pending
 - Slim down CoreOS base image
