@@ -24,30 +24,30 @@ RELEASE="$(rpm -E %fedora)"
 #systemctl set-default graphical.target
 
 ### Disable SystemD targets/services
-systemctl disable sshd.service
+#systemctl disable sshd.service
 
 ### Remove unnecessary packages from core OS (mostly for running as or managing containers)
-REMOVE_PACKAGES=""
-for pkgs in \
-NetworkManager-cloud \
-NetworkManager-team \
-afterburn \
-clevis \
-cloud \
-console \
-google \
-intel \
-moby \
-nvidia-container \
-sssd \
-systemd-container \
-teamd \
-toolbox; do REMOVE_PACKAGES=$REMOVE_PACKAGES`rpm -qa --qf "%{NAME}\n" | grep -E '^'$pkgs | tr '\n' ' '`; done
+#REMOVE_PACKAGES=""
+#for pkgs in \
+#NetworkManager-cloud \
+#NetworkManager-team \
+#afterburn \
+#clevis \
+#cloud \
+#console \
+#google \
+#intel \
+#moby \
+#nvidia-container \
+#sssd \
+#systemd-container \
+#teamd \
+#toolbox; do REMOVE_PACKAGES=$REMOVE_PACKAGES`rpm -qa --qf "%{NAME}\n" | grep -E '^'$pkgs | tr '\n' ' '`; done
 
 # sssd-client causes the build to fail, so removing it from list of packages to remove
-REMOVE_PACKAGES=$(echo "$REMOVE_PACKAGES" | sed -r 's/sssd-client //')
+#REMOVE_PACKAGES=$(echo "$REMOVE_PACKAGES" | sed -r 's/sssd-client //')
 
-rpm-ostree override remove $REMOVE_PACKAGES
+#rpm-ostree override remove $REMOVE_PACKAGES
 
 # Policy to allow upgrades when new builds are available
 cat << 'EOF' | tee /etc/containers/policy.json
