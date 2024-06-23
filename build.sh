@@ -17,7 +17,7 @@ espeak \
 fedora-{bookmarks,chromium-config,flathub-remote} flite fpaste fwupd-plugin-modem \
 gdouros google-noto-{naskh,sans,serif} gstreamer1-plugins-good-qt \
 heif hfsplus hyperv \
-ibus-{authy,hangul,libpinyin,libzhuyin,m17n} intel \
+ibus-{anthy,hangul,libpinyin,libzhuyin,m17n} intel \
 jomolhari \
 kasumi kyotocabinet \
 liblouis libpinyin libva-intel libzhuyin lrzsz \
@@ -60,4 +60,5 @@ cat << 'EOF' | tee /etc/containers/policy.json
 EOF
 
 ## Post install (if rebasing from Kinoite)
+flatpak list
 #flatpak remove -y org.kde.{okular,krdc,kolourpaint,kmines,kmahjongg,kcalc,gwenview,elisa} org.fedoraproject.KDE6Platform
