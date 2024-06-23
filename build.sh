@@ -14,23 +14,23 @@ c-ares cirrus \
 default-fonts-{other,am,ar,as,be,bg,bn,bo,br,chr,dv,dz,el,eo,eu,fa,gu,he,hi,hy,ia,iu,ka,km,kn,ku} \
 default-fonts-{lo,mai,ml,mni,mr,my,nb,ne,nn,nr,nso,or,pa,ru,sat,si,ss,ta,te,th,tn,ts,uk,ur,ve,vi,xh,yi,zu} \
 espeak \
-fedora-{bookmarks,chromium-config,flathub-remote} flite fpaste fwupd-plugin-modem fxload \
+fedora-{bookmarks,chromium-config,flathub-remote} flite fpaste fwupd-plugin-modem \
 gdouros google-noto-{naskh,sans,serif} gstreamer1-plugins-good-qt \
 heif hfsplus hyperv \
 ibus-{authy,hangul,libpinyin,libzhuyin,m17n} intel \
-jomolhari just \
+jomolhari \
 kasumi kyotocabinet \
 liblouis libpinyin libva-intel libzhuyin lrzsz \
-madan mpage mtools \
+madan mpage \
 nilfs nxpwireless \
-oneVPL open{exr,rgb,sc} orca oversteer \
+open{exr,rgb,sc} orca oversteer \
 paktype paps pcsc python3-{boto,brl,louis,pyatspi,s3transfer,simpleaudio,speechd} \
 qemu qrencode qt5 \
 rit \
 sil solaar speech spice sssd \
 tiwilink tracker \
 vazir virtualbox vmaf; do \
-$REMOVE_PACKAGES=$REMOVE_PACKAGES`rpm -qa --qf "%{NAME}\n" | grep -E '^'$pkgs | tr '\n' ' '`; done
+REMOVE_PACKAGES=$REMOVE_PACKAGES`rpm -qa --qf "%{NAME}\n" | grep -E '^'$pkgs | tr '\n' ' '`; done
 
 # Keeping back certain packages as they are core dependancies for other packages
 REMOVE_PACKAGES=$(echo "$REMOVE_PACKAGES" | sed -r 's/ModemManager-glib //')
